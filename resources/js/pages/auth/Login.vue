@@ -1,110 +1,85 @@
 <script setup lang="ts">
-import { Form, Head } from '@inertiajs/vue3';
-import InputError from '@/components/InputError.vue';
-import PasswordInput from '@/components/PasswordInput.vue';
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
-import AuthBase from '@/layouts/AuthLayout.vue';
-import { register } from '@/routes';
-import { store } from '@/routes/login';
-import { request } from '@/routes/password';
+import { useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import WebLayout from '@/layouts/WebLayout.vue';
+import logoSm from '@images/logo-sm.png';
 
-defineProps<{
-    status?: string;
-    canResetPassword: boolean;
-    canRegister: boolean;
-}>();
+const { t } = useI18n();
+
+const form = useForm({
+    email: '',
+    password: '',
+});
+
+function submit() {
+    form.post('/login', {
+        onFinish: () => form.reset('password'),
+    });
+}
 </script>
 
 <template>
-    <AuthBase
-        title="Log in to your account"
-        description="Enter your email and password below to log in"
-    >
-        <Head title="Log in" />
-
-        <div
-            v-if="status"
-            class="mb-4 text-center text-sm font-medium text-green-600"
-        >
-            {{ status }}
-        </div>
-
-        <Form
-            v-bind="store.form()"
-            :reset-on-success="['password']"
-            v-slot="{ errors, processing }"
-            class="flex flex-col gap-6"
-        >
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        required
-                        autofocus
-                        :tabindex="1"
-                        autocomplete="email"
-                        placeholder="email@example.com"
+    <WebLayout>
+        <div class="flex min-h-[60vh] items-center justify-center px-5 py-16">
+            <div class="w-full max-w-sm">
+                <div class="mb-8 text-center">
+                    <img
+                        :src="logoSm"
+                        alt="Amy's House"
+                        class="mx-auto h-16 w-16 rounded-full ring-3 ring-[var(--color-gold)]/30 shadow-[var(--shadow-gold)]"
                     />
-                    <InputError :message="errors.email" />
+                    <h1 class="font-display mt-4 text-2xl font-bold text-[var(--color-navy)]">
+                        {{ t('auth.loginTitle') }}
+                    </h1>
+                    <div class="rainbow-line mx-auto mt-3 w-16" />
                 </div>
 
-                <div class="grid gap-2">
-                    <div class="flex items-center justify-between">
-                        <Label for="password">Password</Label>
-                        <TextLink
-                            v-if="canResetPassword"
-                            :href="request()"
-                            class="text-sm"
-                            :tabindex="5"
+                <div class="rounded-[var(--radius-xl)] border-2 border-[var(--color-gold)]/15 bg-white p-6 shadow-[var(--shadow-card)]">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="mb-1.5 block text-xs font-bold tracking-widest text-[var(--color-navy-muted)] uppercase">
+                                {{ t('auth.email') }}
+                            </label>
+                            <input
+                                v-model="form.email"
+                                type="email"
+                                autocomplete="email"
+                                class="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-cream-dark)] bg-[var(--color-cream)] px-4 py-2.5 text-sm text-[var(--color-navy)] transition focus:border-[var(--color-gold)] focus:outline-none focus:ring-3 focus:ring-[var(--color-gold)]/15"
+                                @keyup.enter="submit"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="mb-1.5 block text-xs font-bold tracking-widest text-[var(--color-navy-muted)] uppercase">
+                                {{ t('auth.password') }}
+                            </label>
+                            <input
+                                v-model="form.password"
+                                type="password"
+                                autocomplete="current-password"
+                                class="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-cream-dark)] bg-[var(--color-cream)] px-4 py-2.5 text-sm text-[var(--color-navy)] transition focus:border-[var(--color-gold)] focus:outline-none focus:ring-3 focus:ring-[var(--color-gold)]/15"
+                                @keyup.enter="submit"
+                            />
+                        </div>
+
+                        <p v-if="form.errors.email" class="rounded-lg bg-[var(--color-rose-light)] px-3 py-2 text-xs font-bold text-[var(--color-rose)]">
+                            {{ form.errors.email }}
+                        </p>
+
+                        <button
+                            class="btn-gold w-full rounded-[var(--radius-md)] py-3 text-sm tracking-wide"
+                            :disabled="form.processing"
+                            @click="submit"
                         >
-                            Forgot password?
-                        </TextLink>
+                            {{ form.processing ? t('common.loading') : t('auth.loginButton') }}
+                        </button>
                     </div>
-                    <PasswordInput
-                        id="password"
-                        name="password"
-                        required
-                        :tabindex="2"
-                        autocomplete="current-password"
-                        placeholder="Password"
-                    />
-                    <InputError :message="errors.password" />
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
-                    </Label>
-                </div>
-
-                <Button
-                    type="submit"
-                    class="mt-4 w-full"
-                    :tabindex="4"
-                    :disabled="processing"
-                    data-test="login-button"
-                >
-                    <Spinner v-if="processing" />
-                    Log in
-                </Button>
+                <p class="mt-5 text-center text-xs text-[var(--color-navy-muted)]">
+                    {{ t('auth.noAccount') }}
+                </p>
             </div>
-
-            <div
-                class="text-center text-sm text-muted-foreground"
-                v-if="canRegister"
-            >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
-            </div>
-        </Form>
-    </AuthBase>
+        </div>
+    </WebLayout>
 </template>

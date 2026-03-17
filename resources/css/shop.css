@@ -1,0 +1,191 @@
+/* === Brand Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap');
+
+/* === Brand Design Tokens + ALL styles scoped to shop === */
+.shop-layout {
+    /* Fonts */
+    --font-display: 'Cormorant Garamond', 'Georgia', serif;
+    --font-body: 'Nunito', 'Segoe UI', sans-serif;
+
+    /* Colors */
+    --color-navy: #141E38;
+    --color-navy-light: #2A3A5C;
+    --color-navy-muted: #60708A;
+
+    --color-gold: #D4A020;
+    --color-gold-bright: #F0C040;
+    --color-gold-light: #FADB6E;
+    --color-gold-pale: #FFF3D0;
+
+    --color-cream: #FFFDF7;
+    --color-cream-dark: #F7F2E8;
+    --color-warm-white: #FFFFFF;
+
+    --color-rose: #E5385A;
+    --color-rose-light: #FDE8EC;
+    --color-rose-deep: #C02040;
+
+    --color-coral: #F06830;
+    --color-coral-light: #FEE8DD;
+
+    --color-sage: #22A06B;
+    --color-sage-light: #DFFCED;
+
+    --color-lavender: #7B4FD0;
+    --color-lavender-light: #EDE5FA;
+
+    --color-sky: #2388E8;
+    --color-sky-light: #E0F0FF;
+
+    --color-fuchsia: #D040A0;
+    --color-fuchsia-light: #FCE4F2;
+
+    /* Shadows */
+    --shadow-soft: 0 2px 15px -3px rgba(20, 30, 56, 0.08), 0 4px 6px -4px rgba(20, 30, 56, 0.05);
+    --shadow-card: 0 4px 24px -4px rgba(20, 30, 56, 0.08), 0 2px 8px -2px rgba(20, 30, 56, 0.04);
+    --shadow-card-hover: 0 16px 40px -8px rgba(20, 30, 56, 0.15), 0 6px 16px -4px rgba(20, 30, 56, 0.06);
+    --shadow-gold: 0 4px 20px -3px rgba(212, 160, 32, 0.35);
+    --shadow-gold-strong: 0 6px 28px -3px rgba(212, 160, 32, 0.5);
+    --shadow-rose: 0 4px 20px -3px rgba(229, 56, 90, 0.3);
+    --shadow-glow: 0 0 20px rgba(212, 160, 32, 0.15);
+
+    /* Radii */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+
+    /* Base styles */
+    font-family: var(--font-body);
+    color: var(--color-navy);
+    background-color: var(--color-cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* === Everything below is scoped inside .shop-layout === */
+
+    .font-display {
+        font-family: var(--font-display);
+    }
+
+    .font-body {
+        font-family: var(--font-body);
+    }
+
+    .bg-texture {
+        background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.012'/%3E%3C/svg%3E");
+    }
+
+    .gold-line {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold) 20%, var(--color-gold-bright) 50%, var(--color-gold) 80%, transparent);
+    }
+
+    .rainbow-line {
+        height: 3px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--color-rose) 0%, var(--color-coral) 20%, var(--color-gold-bright) 40%, var(--color-sage) 60%, var(--color-sky) 80%, var(--color-lavender) 100%);
+    }
+
+    .text-gold-shimmer {
+        background: linear-gradient(135deg, #D4A020 0%, #F5D76E 45%, #D4A020 55%, #F5D76E 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .gold-border-hover {
+        position: relative;
+    }
+
+    .gold-border-hover::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 2px solid transparent;
+        background: linear-gradient(135deg, var(--color-gold), var(--color-gold-bright), var(--color-gold)) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .gold-border-hover:hover::after {
+        opacity: 1;
+    }
+
+    .btn-gold {
+        background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%);
+        color: var(--color-navy);
+        font-weight: 700;
+        box-shadow: var(--shadow-gold);
+        transition: all 0.25s ease;
+    }
+
+    .btn-gold:hover {
+        box-shadow: var(--shadow-gold-strong);
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+    }
+
+    .btn-navy {
+        background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.25s ease;
+    }
+
+    .btn-navy:hover {
+        box-shadow: var(--shadow-soft);
+        transform: translateY(-1px);
+        filter: brightness(1.15);
+    }
+
+    .transition-card {
+        transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .filter-pill-active {
+        animation: pill-pop 0.25s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .card-enter {
+        animation: card-fade-in 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+    }
+
+    .tag-rose { color: #fff; background: #E5385A; }
+    .tag-coral { color: #fff; background: #F06830; }
+    .tag-sage { color: #fff; background: #22A06B; }
+    .tag-lavender { color: #fff; background: #7B4FD0; }
+    .tag-sky { color: #fff; background: #2388E8; }
+    .tag-fuchsia { color: #fff; background: #D040A0; }
+    .tag-gold { color: #141E38; background: linear-gradient(135deg, #D4A020, #F0C040); }
+}
+
+/* Scrollbar — scoped */
+.shop-layout::-webkit-scrollbar { width: 10px; }
+.shop-layout::-webkit-scrollbar-track { background: #F7F2E8; }
+.shop-layout::-webkit-scrollbar-thumb { background: #D4A020; border-radius: 5px; border: 2px solid #F7F2E8; }
+.shop-layout::-webkit-scrollbar-thumb:hover { background: #F0C040; }
+
+/* Keyframes must be global but they have unique names so won't conflict */
+@keyframes shimmer {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 200% center; }
+}
+
+@keyframes pill-pop {
+    0% { transform: scale(0.95); }
+    60% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+@keyframes card-fade-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}

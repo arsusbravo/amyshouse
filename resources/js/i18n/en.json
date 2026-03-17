@@ -1,0 +1,81 @@
+{
+    "common": {
+        "siteName": "Amy's House",
+        "home": "Home",
+        "about": "About",
+        "cart": "Cart",
+        "myOrders": "My Orders",
+        "login": "Login",
+        "logout": "Logout",
+        "admin": "Admin",
+        "search": "Search...",
+        "filter": "Filter",
+        "all": "All",
+        "loading": "Loading...",
+        "noResults": "No products found",
+        "currency": "€"
+    },
+    "product": {
+        "addToCart": "Add to Cart",
+        "loginToBuy": "Login to Buy",
+        "soldOut": "Sold Out",
+        "limited": "Limited",
+        "material": "Material",
+        "size": "Size",
+        "productionTime": "Production Time",
+        "days": "days",
+        "fits": "Fits",
+        "inStock": "In Stock",
+        "stockLeft": "{count} left"
+    },
+    "type": {
+        "labubu_clothes": "Labubu Clothes",
+        "real_clothes": "Clothes",
+        "bag": "Bags",
+        "accessory": "Accessories"
+    },
+    "cart": {
+        "title": "Shopping Cart",
+        "empty": "Your cart is empty",
+        "quantity": "Qty",
+        "subtotal": "Subtotal",
+        "total": "Total",
+        "remove": "Remove",
+        "checkout": "Checkout",
+        "continueShopping": "Continue Shopping"
+    },
+    "checkout": {
+        "title": "Confirm Order",
+        "pickupLocation": "Pickup Location",
+        "notes": "Notes",
+        "notesPlaceholder": "Any special requests?",
+        "placeOrder": "Place Order",
+        "orderPlaced": "Order placed!"
+    },
+    "order": {
+        "title": "My Orders",
+        "orderNumber": "Order #",
+        "date": "Date",
+        "status": "Status",
+        "total": "Total",
+        "noOrders": "No orders yet",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "ready": "Ready for Pickup",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+    },
+    "auth": {
+        "email": "Email",
+        "password": "Password",
+        "loginTitle": "Login",
+        "loginButton": "Login",
+        "noAccount": "No account? Contact Amy",
+        "invalidCredentials": "Invalid email or password",
+        "accountInactive": "Account is inactive, please contact Amy"
+    },
+    "about": {
+        "title": "About Amy's House",
+        "subtitle": "Handmade warmth, worn with heart"
+    }
+}
