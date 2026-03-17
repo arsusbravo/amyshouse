@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('product_type_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('price'); // in cents
             $table->unsignedInteger('stock')->default(0);
-            $table->json('size_info')->nullable();
+            $table->text('size_info')->nullable();
             $table->unsignedInteger('production_days')->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('sort_order')->default(0);
