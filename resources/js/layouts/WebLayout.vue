@@ -7,6 +7,7 @@ import { ShoppingBag, Globe, LogOut, Settings, Menu, X } from 'lucide-vue-next';
 import { useCart } from '@/composables/useCart';
 import { setStoredLocale } from '@/i18n';
 import logoSm from '@images/logo-sm.png';
+import i18nInstance from '@/i18n';
 
 const { t, locale } = useI18n();
 const page = usePage();
@@ -20,8 +21,11 @@ const siteContent = computed(() => {
     return all?.[locale.value] || all?.['zh-TW'] || {};
 });
 
-console.log('Locale:', locale.value);
-console.log('languages:', t('common.home'));
+console.log('--- DEBUG START ---');
+console.log('Current Locale:', locale.value);
+console.log('Direct Plugin Messages:', i18nInstance.global.messages.value);
+console.log('Translation Test:', t('common.home'));
+console.log('--- DEBUG END ---');
 
 function toggleLocale() {
     const next = locale.value === 'zh-TW' ? 'en' : 'zh-TW';
