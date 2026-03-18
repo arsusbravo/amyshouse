@@ -20,6 +20,9 @@ const siteContent = computed(() => {
     return all?.[locale.value] || all?.['zh-TW'] || {};
 });
 
+console.log('Locale:', locale.value);
+console.log('languages:', t('common.home'));
+
 function toggleLocale() {
     const next = locale.value === 'zh-TW' ? 'en' : 'zh-TW';
     locale.value = next;
