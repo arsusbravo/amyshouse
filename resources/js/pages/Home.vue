@@ -2,6 +2,7 @@
 import { ref, watch, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import { Package, SlidersHorizontal, ChevronDown } from 'lucide-vue-next';
 import WebLayout from '@/layouts/WebLayout.vue';
 import ProductCard, { type ProductCardData } from '@/components/ProductCard.vue';
@@ -12,7 +13,8 @@ import FilterBar, {
 } from '@/components/FilterBar.vue';
 import logoFull from '@images/logo-full.png';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
+const t = customT;
 
 const props = defineProps<{
     products: ProductCardData[];

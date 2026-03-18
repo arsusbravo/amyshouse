@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import WebLayout from '@/layouts/WebLayout.vue';
 import logoFull from '@images/logo-full.png';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
+const t = customT;
 
 const props = defineProps<{
     content: Record<string, Record<string, string>>;

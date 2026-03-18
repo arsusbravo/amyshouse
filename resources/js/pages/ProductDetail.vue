@@ -2,11 +2,13 @@
 import { ref, computed } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import { ShoppingBag, ChevronLeft, ChevronRight, Minus, Plus, Clock, Ruler, Scissors } from 'lucide-vue-next';
 import WebLayout from '@/layouts/WebLayout.vue';
 import { useCart } from '@/composables/useCart';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
+const t = customT;
 const page = usePage();
 const { addItem } = useCart();
 

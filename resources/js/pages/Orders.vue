@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import { Package } from 'lucide-vue-next';
 import WebLayout from '@/layouts/WebLayout.vue';
 
-const { t } = useI18n();
+const t = customT;
 
 interface Order {
     id: number;

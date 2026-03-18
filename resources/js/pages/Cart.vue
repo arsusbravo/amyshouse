@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import { Trash2, Minus, Plus, ShoppingBag } from 'lucide-vue-next';
 import WebLayout from '@/layouts/WebLayout.vue';
 import { useCart } from '@/composables/useCart';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
+const t = customT;
 const { items, totalPrice, updateQuantity, removeItem } = useCart();
 
 function formatPrice(cents: number): string {

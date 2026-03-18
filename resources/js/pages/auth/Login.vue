@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { customT } from '@/i18n';
 import WebLayout from '@/layouts/WebLayout.vue';
 import logoSm from '@images/logo-sm.png';
 
-const { t } = useI18n();
+const t = customT;
 
 const form = useForm({
     email: '',
