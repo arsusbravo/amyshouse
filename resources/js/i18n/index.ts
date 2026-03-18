@@ -22,8 +22,9 @@ const i18n = createI18n({
     locale: getStoredLocale(),
     fallbackLocale: 'zh-TW',
     messages: {
-        'zh-TW': zhTW,
-        'en': en,
+        // This "cleans" the JSON objects for the production bundler
+        'zh-TW': JSON.parse(JSON.stringify(zhTW)),
+        'en': JSON.parse(JSON.stringify(en)),
     },
 });
 

@@ -28,7 +28,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@images': resolve(__dirname, 'resources/images'),
-            'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+            'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
         },
     },
 });

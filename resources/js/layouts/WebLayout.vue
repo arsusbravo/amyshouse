@@ -30,10 +30,10 @@ function toggleLocale() {
 // To debug safely without crashing:
 import { onMounted } from 'vue';
 onMounted(() => {
-    console.log('Locale on mount:', locale.value);
-    // Check if messages actually exist now
-    const messages = (locale.value === 'en') ? 'English Loaded' : 'Chinese Loaded';
-    console.log(messages);
+    console.log('--- FINAL PROD TEST ---');
+    console.log('Current Locale:', locale.value);
+    // If this says "common.home", the JSON.parse fix above should solve it
+    console.log('Home Translation:', t('common.home'));
 });
 </script>
 
