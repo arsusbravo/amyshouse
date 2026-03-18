@@ -22,16 +22,9 @@ const i18n = createI18n({
     locale: getStoredLocale(),
     fallbackLocale: 'zh-TW',
     messages: {
-        'zh-TW': (zhTW as any).default || zhTW,
-        'en': (en as any).default || en,
+        'zh-TW': zhTW,
+        'en': en,
     },
 });
-
-// Use "as any" to stop the "excessively deep" type calculation
-export const t = (i18n.global.t as any);
-
-// For the locale, we cast it to a basic Ref so it stays reactive
-import { type Ref } from 'vue';
-export const locale = (i18n.global.locale as unknown as Ref<string>);
 
 export default i18n;

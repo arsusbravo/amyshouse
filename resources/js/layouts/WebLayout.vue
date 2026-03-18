@@ -7,7 +7,6 @@ import { ShoppingBag, Globe, LogOut, Settings, Menu, X } from 'lucide-vue-next';
 import { useCart } from '@/composables/useCart';
 import { setStoredLocale } from '@/i18n';
 import logoSm from '@images/logo-sm.png';
-import i18nInstance from '@/i18n';
 
 const { t, locale } = useI18n();
 const page = usePage();
@@ -21,17 +20,21 @@ const siteContent = computed(() => {
     return all?.[locale.value] || all?.['zh-TW'] || {};
 });
 
-console.log('--- DEBUG START ---');
-console.log('Current Locale:', locale.value);
-console.log('Direct Plugin Messages:', i18nInstance.global.messages.value);
-console.log('Translation Test:', t('common.home'));
-console.log('--- DEBUG END ---');
 
 function toggleLocale() {
     const next = locale.value === 'zh-TW' ? 'en' : 'zh-TW';
     locale.value = next;
     setStoredLocale(next);
 }
+
+// To debug safely without crashing:
+import { onMounted } from 'vue';
+onMounted(() => {
+    console.log('Locale on mount:', locale.value);
+    // Check if messages actually exist now
+    const messages = (locale.value === 'en') ? 'English Loaded' : 'Chinese Loaded';
+    console.log(messages);
+});
 </script>
 
 <template>
