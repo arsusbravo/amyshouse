@@ -18,6 +18,7 @@ export function setStoredLocale(locale: string): void {
 
 const i18n = createI18n({
     legacy: false,
+    globalInjection: true,
     locale: getStoredLocale(),
     fallbackLocale: 'zh-TW',
     messages: {
