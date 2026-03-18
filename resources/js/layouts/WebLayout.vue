@@ -9,6 +9,7 @@ import { customT, setStoredLocale } from '@/i18n';
 import logoSm from '@images/logo-sm.png';
 
 const { locale } = useI18n();
+const t = customT;
 const page = usePage();
 const { totalItems } = useCart();
 
@@ -19,9 +20,6 @@ const siteContent = computed(() => {
     const all = page.props.siteContent as Record<string, Record<string, string>> | undefined;
     return all?.[locale.value] || all?.['zh-TW'] || {};
 });
-
-const t = customT;
-console.log('Manual Resolver Test:', t('common.home'));
 
 function toggleLocale() {
     const next = locale.value === 'zh-TW' ? 'en' : 'zh-TW';

@@ -3,7 +3,12 @@ import zhTW from './zh-TW.json';
 import en from './en.json';
 
 const STORAGE_KEY = 'amyshouse-locale';
-const messages: Record<string, any> = { 'zh-TW': zhTW, en };
+
+// Keep the raw data in a simple object for our manual resolver
+const messages: Record<string, any> = { 
+    'zh-TW': zhTW, 
+    'en': en 
+};
 
 export function getStoredLocale(): string {
     if (typeof window !== 'undefined') {
@@ -27,20 +32,35 @@ const i18n = createI18n({
     messages: messages,
 });
 
-// THE FAIL-SAFE FUNCTION
+/**
+ * Fail-safe translation function
+ * Bypasses Vue-i18n's runtime resolver which often fails in production bundles
+ */
 export function customT(path: string): string {
+    // Access the current reactive locale
     const currentLocale = i18n.global.locale.value;
+    
+    // Split the path (e.g., 'common.home' -> ['common', 'home'])
     const keys = path.split('.');
-    let result = messages[currentLocale];
+    
+    // Start at the root of the current language's messages
+    let result = messages[currentLocale] || messages['zh-TW'];
 
     for (const key of keys) {
-        if (result && result[key]) {
+        if (result && Object.prototype.hasOwnProperty.call(result, key)) {
             result = result[key];
         } else {
-            // If manual lookup fails, try fallback to the actual t() function
-            return i18n.global.t(path);
+            // Fallback to the default i18n t() if manual lookup fails
+            // or just return the key if all else fails
+            try {
+                const fallback = i18n.global.t(path);
+                return fallback !== path ? fallback : path;
+            } catch {
+                return path;
+            }
         }
     }
+
     return typeof result === 'string' ? result : path;
 }
 
