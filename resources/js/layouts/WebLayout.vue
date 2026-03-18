@@ -5,10 +5,10 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { ShoppingBag, Globe, LogOut, Settings, Menu, X } from 'lucide-vue-next';
 import { useCart } from '@/composables/useCart';
-import { setStoredLocale } from '@/i18n';
+import { customT, setStoredLocale } from '@/i18n';
 import logoSm from '@images/logo-sm.png';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
 const page = usePage();
 const { totalItems } = useCart();
 
@@ -20,6 +20,8 @@ const siteContent = computed(() => {
     return all?.[locale.value] || all?.['zh-TW'] || {};
 });
 
+const t = customT;
+console.log('Manual Resolver Test:', t('common.home'));
 
 function toggleLocale() {
     const next = locale.value === 'zh-TW' ? 'en' : 'zh-TW';
@@ -27,14 +29,6 @@ function toggleLocale() {
     setStoredLocale(next);
 }
 
-// To debug safely without crashing:
-import { onMounted } from 'vue';
-onMounted(() => {
-    console.log('--- FINAL PROD TEST ---');
-    console.log('Current Locale:', locale.value);
-    // If this says "common.home", the JSON.parse fix above should solve it
-    console.log('Home Translation:', t('common.home'));
-});
 </script>
 
 <template>
